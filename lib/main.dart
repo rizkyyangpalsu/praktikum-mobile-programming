@@ -43,11 +43,37 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.fromLTRB(16.0, 64.0, 16.0, 0.0),
-        child: Column(
-          children: [Row(
+        child: MovieViewer()
+      ),
+    );
+  }
+}
+
+class MovieViewer extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _MovieViewerState();
+}
+
+class _MovieViewerState extends State<MovieViewer> {
+  final List<String> movieList = [
+    "images/avengers.jpeg",
+    "images/avengers.jpeg",
+    "images/avengers.jpeg"
+  ];
+
+  Widget movieViewer;
+
+  @override
+  void initState() {
+    super.initState();
+    List<Widget> movieChildren = [];
+
+    movieList.toList().asMap().forEach((key, value) {
+      movieChildren.add(
+          Row(
             children: [
               new Padding(
-                padding: EdgeInsets.all(4.0),
+                padding: EdgeInsets.all(16.0),
                 child: new Container(
                   child: Image.asset('images/avengers.jpeg'),
                   width: 175.0,
@@ -87,9 +113,20 @@ class _MyHomePageState extends State<MyHomePage> {
                   )
               )
             ],
-          )],
-        )
-      ),
+          )
+      );
+    });
+
+    movieViewer = Column(
+      children: movieChildren,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(top: 16),
+      child: movieViewer,
     );
   }
 }
