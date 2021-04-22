@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'components/movieViewer.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -43,90 +45,10 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.fromLTRB(16.0, 64.0, 16.0, 0.0),
-        child: MovieViewer()
+        child: Column(
+          children: [MovieViewer()],
+        )
       ),
-    );
-  }
-}
-
-class MovieViewer extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() => _MovieViewerState();
-}
-
-class _MovieViewerState extends State<MovieViewer> {
-  final List<String> movieList = [
-    "images/avengers.jpeg",
-    "images/avengers.jpeg",
-    "images/avengers.jpeg"
-  ];
-
-  Widget movieViewer;
-
-  @override
-  void initState() {
-    super.initState();
-    List<Widget> movieChildren = [];
-
-    movieList.toList().asMap().forEach((key, value) {
-      movieChildren.add(
-          Row(
-            children: [
-              new Padding(
-                padding: EdgeInsets.all(16.0),
-                child: new Container(
-                  child: Image.asset('images/avengers.jpeg'),
-                  width: 175.0,
-                  height: 175.0,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(16.0),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Color(0xFF454545),
-                            offset: Offset(0.0, 4.0),
-                            blurRadius: 12.0
-                        )
-                      ]
-                  ),
-                  padding: EdgeInsets.all(12.0),
-                ),
-              ),
-
-              new Expanded(
-                  child: new Container(
-                    margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
-                    child: new Column(
-                      children: [
-                        new Text("Avengers: Endgame", textAlign: TextAlign.center, style: TextStyle(
-                            fontSize: 28.0,
-                            fontWeight: FontWeight.bold
-                        ),
-                        ),
-                        new Padding(padding: EdgeInsets.all(2.0)),
-                        new Text("film superhero", style: TextStyle(
-                            fontSize: 16.0
-                        ),
-                        ),
-                      ],
-                    ),
-                  )
-              )
-            ],
-          )
-      );
-    });
-
-    movieViewer = Column(
-      children: movieChildren,
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: 16),
-      child: movieViewer,
     );
   }
 }
