@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'components/movieViewer.dart';
 
 void main() {
@@ -39,15 +39,20 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.fromLTRB(16.0, 64.0, 16.0, 0.0),
-        child: Column(
-          children: [MovieViewer()],
-        )
+        child: Stack(
+          children: [
+            Container(
+                padding: const EdgeInsets.fromLTRB(16.0, 64.0, 16.0, 0.0),
+                child: Column(
+                  children: [MovieViewer()],
+                )
+            ),
+          ],
+        ),
       ),
     );
   }
