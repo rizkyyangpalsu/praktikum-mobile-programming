@@ -1,10 +1,14 @@
+import 'dart:collection';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
+import '../config.dart';
+
 class MovieDetail extends StatefulWidget {
 
-  final List<String> movie;
+  final LinkedHashMap<String, dynamic> movie;
 
   MovieDetail({ Key key, @required this.movie }) : super(key: key);
 
@@ -15,9 +19,10 @@ class MovieDetail extends StatefulWidget {
 class _MovieDetailState extends State<MovieDetail> {
   @override
   Widget build(BuildContext context) {
+    print(widget.movie);
     return Scaffold(
       body: new Stack(fit: StackFit.expand, children: [
-        new Image.asset(widget.movie[1], fit: BoxFit.cover),
+        new Image(image: new NetworkImage(MOVIE_DB_IMAGE_URL + widget.movie["backdrop_path"]), fit: BoxFit.cover),
         new BackdropFilter(
           filter: new ui.ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
           child: new Container(
@@ -39,7 +44,7 @@ class _MovieDetailState extends State<MovieDetail> {
                   decoration: new BoxDecoration(
                     borderRadius: new BorderRadius.circular(10.0),
                     image: new DecorationImage(
-                      image: new ExactAssetImage(widget.movie[1]),
+                      image: new NetworkImage(MOVIE_DB_IMAGE_URL + widget.movie["poster_path"]),
                       fit: BoxFit.cover
                     ),
                     boxShadow: [
@@ -57,7 +62,7 @@ class _MovieDetailState extends State<MovieDetail> {
                     children: <Widget>[
                       new Expanded(
                           child: new Text(
-                            widget.movie[0],
+                            widget.movie["original_title"],
                             style: new TextStyle(
                                 color: Colors.white,
                                 fontSize: 30.0,
@@ -66,7 +71,7 @@ class _MovieDetailState extends State<MovieDetail> {
 
                     ]),
                 ),
-                new Text(widget.movie[2],style: new TextStyle(color: Colors.white, fontFamily: 'Arvo')),
+                new Text(widget.movie["overview"],style: new TextStyle(color: Colors.white, fontFamily: 'Arvo')),
                 new Padding(padding: const EdgeInsets.all(10.0)),
               ],
             ),
